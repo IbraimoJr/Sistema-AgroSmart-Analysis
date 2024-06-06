@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart Analysis - Técnico Agrícola</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">AgroSmart Analysis - Técnico Agrícola</h1>
+        <div class="list-group mt-5">
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('reportForm')">Elaborar Relatórios</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('trainingForm')">Agendar Treinamentos</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('resultsForm')">Introduzir Resultados de Coleta</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('pestForm')">Alertar sobre Pragas e Doenças</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('supportForm')">Oferecer Suporte Técnico</a>
+        </div>
+        
+        <div id="reportForm" class="form-container" style="display: none;">
+            <h2>Elaborar Relatórios</h2>
+            <form>
+                <div class="form-group">
+                    <label for="reportTitle">Título do Relatório</label>
+                    <input type="text" class="form-control" id="reportTitle" placeholder="Digite o título do relatório">
+                </div>
+                <div class="form-group">
+                    <label for="reportContent">Conteúdo do Relatório</label>
+                    <textarea class="form-control" id="reportContent" rows="5" placeholder="Digite o conteúdo do relatório"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <div class="chart-container mt-5">
+                <canvas id="reportChart"></canvas>
+            </div>
+        </div>
+        
+
+        <div id="trainingForm" class="form-container" style="display: none;">
+            <h2>Agendar Treinamentos</h2>
+            <form>
+                <div class="form-group">
+                    <label for="trainingDate">Data e Hora</label>
+                    <input type="datetime-local" class="form-control" id="trainingDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="trainingLocation">Local</label>
+                    <input type="text" class="form-control" id="trainingLocation" required>
+                </div>
+                <div class="form-group">
+                    <label for="trainingTopic">Tópico do Treinamento</label>
+                    <input type="text" class="form-control" id="trainingTopic" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agendar</button>
+            </form>
+        </div>
+
+        <div id="resultsForm" class="form-container" style="display: none;">
+            <h2>Introduzir Resultados de Coleta</h2>
+            <form>
+                <div class="form-group">
+                    <label for="collectionType">Tipo de Coleta</label>
+                    <input type="text" class="form-control" id="collectionType" required>
+                </div>
+                <div class="form-group">
+                    <label for="collectionDate">Data e Hora</label>
+                    <input type="datetime-local" class="form-control" id="collectionDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="collectionResults">Resultados Obtidos</label>
+                    <textarea class="form-control" id="collectionResults" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+
+        <div id="pestForm" class="form-container" style="display: none;">
+            <h2>Alertar sobre Pragas e Doenças</h2>
+            <form>
+                <div class="form-group">
+                    <label for="pestType">Tipo de Praga/Doença</label>
+                    <input type="text" class="form-control" id="pestType" required>
+                </div>
+                <div class="form-group">
+                    <label for="affectedArea">Área Afetada</label>
+                    <input type="text" class="form-control" id="affectedArea" required>
+                </div>
+                <div class="form-group">
+                    <label for="pestDescription">Descrição</label>
+                    <textarea class="form-control" id="pestDescription" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Alerta</button>
+            </form>
+        </div>
+
+        <div id="supportForm" class="form-container" style="display: none;">
+            <h2>Oferecer Suporte Técnico</h2>
+            <form>
+                <div class="form-group">
+                    <label for="supportType">Tipo de Suporte</label>
+                    <input type="text" class="form-control" id="supportType" required>
+                </div>
+                <div class="form-group">
+                    <label for="supportDescription">Descrição do Problema</label>
+                    <textarea class="form-control" id="supportDescription" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Suporte</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Dados fictícios para o gráfico de relatórios
+        var reportLabels = ["Relatório 1", "Relatório 2", "Relatório 3", "Relatório 4", "Relatório 5"];
+        var reportData = [10, 20, 15, 25, 30];
+        
+        // Configuração do gráfico
+        var ctx = document.getElementById("reportChart").getContext("2d");
+        var reportChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: reportLabels,
+                datasets: [{
+                    label: 'Número de Relatórios',
+                    data: reportData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+    <script src="scripts.js"></script>
+</body>
+</html>

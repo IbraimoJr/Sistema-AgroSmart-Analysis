@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart Analysis - Gestor do Sistema</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">AgroSmart Analysis - Gestor do Sistema</h1>
+        <div class="list-group mt-5">
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('performanceForm')">Monitorar Desempenho do Sistema</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('updatesForm')">Realizar Atualizações</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('databaseForm')">Gerir Base de Dados</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('reportsForm')">Gerar Relatórios</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('feedbackForm')">Coletar Feedback</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('needsForm')">Identificar Necessidades Não Atendidas</a>
+        </div>
+        
+        <div id="performanceForm" class="form-container" style="display: none;">
+            <h2>Monitorar Desempenho do Sistema</h2>
+            <div class="chart-container mt-5">
+                <canvas id="performanceChart"></canvas>
+            </div>
+            <div class="form-group mt-5">
+                <h4>Indicadores Chave de Desempenho (KPIs)</h4>
+                <ul id="kpis" class="list-group">
+                    <li class="list-group-item">KPI 1</li>
+                    <li class="list-group-item">KPI 2</li>
+                </ul>
+            </div>
+        </div>
+    
+
+        <div id="updatesForm" class="form-container" style="display: none;">
+            <h2>Realizar Atualizações</h2>
+            <div class="form-group">
+                <label for="updates">Atualizações Pendentes</label>
+                <ul id="updates" class="list-group">
+                    <li class="list-group-item">Atualização 1</li>
+                    <li class="list-group-item">Atualização 2</li>
+                </ul>
+            </div>
+            <button id="applyUpdatesBtn" class="btn btn-primary">Aplicar Atualizações</button>
+        </div>
+
+        <div id="databaseForm" class="form-container" style="display: none;">
+            <h2>Gerir Base de Dados</h2>
+            <div class="form-group">
+                <label for="backup">Backup</label>
+                <button class="btn btn-secondary btn-block">Realizar Backup</button>
+            </div>
+            <div class="form-group">
+                <label for="restore">Restauração</label>
+                <button class="btn btn-secondary btn-block">Realizar Restauração</button>
+            </div>
+            <div class="form-group">
+                <label for="clean">Limpeza de Dados</label>
+                <button class="btn btn-secondary btn-block">Realizar Limpeza</button>
+            </div>
+        </div>
+                
+        <div id="reportsForm" class="form-container" style="display: none;">
+            <h2>Relatórios</h2>
+            <div id="reportArea" class="mt-5">
+                <!-- Os relatórios serão exibidos aqui -->
+            </div>
+        </div>
+
+        <div id="reportsForm" class="form-container" style="display: none;">
+            <h2>Gerar Relatórios</h2>
+            <form>
+                <div class="form-group">
+                    <label for="reportPeriod">Período</label>
+                    <input type="text" class="form-control" id="reportPeriod" required>
+                </div>
+                <div class="form-group">
+                    <label for="reportType">Tipo de Dados</label>
+                    <input type="text" class="form-control" id="reportType" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+            </form>
+        </div>
+
+        <div id="feedbackForm" class="form-container" style="display: none;">
+            <h2>Coletar Feedback</h2>
+            <form>
+                <div class="form-group">
+                    <label for="feedbackType">Tipo de Feedback</label>
+                    <input type="text" class="form-control" id="feedbackType" required>
+                </div>
+                <div class="form-group">
+                    <label for="feedbackDescription">Descrição</label>
+                    <textarea class="form-control" id="feedbackDescription" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Feedback</button>
+            </form>
+        </div>
+
+        <div id="needsForm" class="form-container" style="display: none;">
+            <h2>Identificar Necessidades Não Atendidas</h2>
+            <ul id="needs" class="list-group">
+                <li class="list-group-item">Necessidade 1</li>
+                <li class="list-group-item">Necessidade 2</li>
+            </ul>
+            <button class="btn btn-primary">Gerar Relatório de Necessidades</button>
+        </div>
+    </div>
+    <script>
+        // Função para exibir as atualizações pendentes
+function showUpdatesForm() {
+    hideAllForms();
+    document.getElementById("updatesForm").style.display = "block";
+}
+
+// Função para aplicar as atualizações
+document.getElementById("applyUpdatesBtn").addEventListener("click", applyUpdates);
+
+function applyUpdates() {
+    // Lógica para aplicar as atualizações
+    alert("Atualizações aplicadas com sucesso!");
+}
+
+// Função para gerar relatórios
+function generateReport() {
+    hideAllForms();
+    document.getElementById("reportsForm").style.display = "block";
+
+    // Lógica para gerar os relatórios dinamicamente
+    var reportArea = document.getElementById("reportArea");
+    reportArea.innerHTML = "<h3>Relatório de Produção</h3><p>Dados do relatório...</p><h3>Relatório de Vendas</h3><p>Dados do relatório...</p>";
+}
+
+// Função auxiliar para ocultar todos os formulários
+function hideAllForms() {
+    var forms = document.getElementsByClassName("form-container");
+    for (var i = 0; i < forms.length; i++) {
+        forms[i].style.display = "none";
+    }
+}
+// Dados fictícios para o gráfico de desempenho do sistema
+var performanceLabels = ["Semana 1", "Semana 2", "Semana 3", "Semana 4", "Semana 5"];
+var performanceData = [100, 120, 90, 110, 130];
+
+// Configuração do gráfico
+var ctx = document.getElementById("performanceChart").getContext("2d");
+var performanceChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: performanceLabels,
+        datasets: [{
+            label: 'Desempenho do Sistema',
+            data: performanceData,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+

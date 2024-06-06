@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart Analysis - Agricultor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">AgroSmart Analysis - Agricultor</h1>
+        <div class="list-group mt-5">
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('climateForm')">Registrar Condições Climáticas</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('practiceForm')">Registrar Práticas Agrícolas</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showForm('soilForm')">Atualizar Informações do Solo</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showAlerts()">Alertas e Notificações</a>
+            <a href="#" class="list-group-item list-group-item-action" onclick="showRecommendations()">Recomendações de Cultivo</a>
+        </div>
+        
+        <div id="climateForm" class="form-container" style="display: none;">
+            <h2>Registrar Condições Climáticas</h2>
+            <form>
+                <div class="form-group">
+                    <label for="temperature">Temperatura (°C)</label>
+                    <input type="number" class="form-control" id="temperature" placeholder="Digite a temperatura">
+                </div>
+                <div class="form-group">
+                    <label for="humidity">Umidade (%)</label>
+                    <input type="number" class="form-control" id="humidity" placeholder="Digite a umidade">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <div class="chart-container mt-5">
+                <canvas id="climateChart"></canvas>
+            </div>
+        </div>
+        
+        <div id="practiceForm" class="form-container" style="display: none;">
+            <h2>Registrar Práticas Agrícolas</h2>
+            <form>
+                <div class="form-group">
+                    <label for="practiceType">Tipo de Prática</label>
+                    <input type="text" class="form-control" id="practiceType" placeholder="Digite o tipo de prática" required>
+                </div>
+                <div class="form-group">
+                    <label for="practiceDate">Data e Hora</label>
+                    <input type="datetime-local" class="form-control" id="practiceDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="practiceDescription">Descrição</label>
+                    <textarea class="form-control" id="practiceDescription" placeholder="Descreva a prática" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+
+        <div id="soilForm" class="form-container" style="display: none;">
+            <h2>Atualizar Informações do Solo</h2>
+            <form>
+                <div class="form-group">
+                    <label for="ph">pH do Solo</label>
+                    <input type="text" class="form-control" id="ph" placeholder="Digite o pH do solo" required>
+                </div>
+                <div class="form-group">
+                    <label for="nutrients">Níveis de Nutrientes</label>
+                    <input type="text" class="form-control" id="nutrients" placeholder="Digite os níveis de nutrientes" required>
+                </div>
+                <div class="form-group">
+                    <label for="structure">Estrutura do Solo</label>
+                    <input type="text" class="form-control" id="structure" placeholder="Digite a estrutura do solo" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+
+        <div id="alerts" class="form-container" style="display: none;">
+            <h2>Alertas e Notificações</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Alerta de Condições Climáticas</li>
+                <li class="list-group-item">Alerta de Pragas</li>
+            </ul>
+        </div>
+
+        <div id="recommendations" class="form-container" style="display: none;">
+            <h2>Recomendações de Cultivo</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Recomendação de Plantio de Milho</li>
+                <li class="list-group-item">Recomendação de Plantio de Soja</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Dados fictícios para o gráfico de condições climáticas
+        var temperatureData = [20, 25, 28, 22, 24];
+        var humidityData = [50, 55, 60, 58, 52];
+        var labels = ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5"];
+        
+        // Configuração do gráfico
+        var ctx = document.getElementById("climateChart").getContext("2d");
+        var climateChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperatura (°C)',
+                    data: temperatureData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1
+                }, {
+                    label: 'Umidade (%)',
+                    data: humidityData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    <script src="scripts.js"></script>
+</body>
+</html>

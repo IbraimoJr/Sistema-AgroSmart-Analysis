@@ -1,0 +1,32 @@
+/* Estilos comuns */
+.form-container {
+    margin-top: 20px;
+}
+
+/* Estilos para formulários */
+.form-container form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para cada tela */
+/* Agricultor */
+#climateForm, #practiceForm, #soilForm, #alerts, #recommendations {
+    margin-top: 20px;
+}
+
+/* Técnico Agrícola */
+#reportForm, #trainingForm, #resultsForm, #pestForm, #supportForm {
+    margin-top: 20px;
+}
+
+/* Gestor do Sistema */
+#performanceForm, #updatesForm, #databaseForm, #reportsForm, #feedbackForm, #needsForm {
+    margin-top: 20px;
+}
